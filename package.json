@@ -1,0 +1,27 @@
+{
+  "name": "news-scraper",
+  "version": "1.0.0",
+  "description": "Scrape news articles and allow users to comment.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dsuare1/newsScraper.git"
+  },
+  "author": "Derrick Suarez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dsuare1/newsScraper/issues"
+  },
+  "homepage": "https://github.com/dsuare1/newsScraper#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "cheerio": "^0.22.0",
+    "express": "^4.14.0",
+    "express-handlebars": "^3.0.0",
+    "mongoose": "^4.5.10",
+    "request": "^2.74.0"
+  }
+}
