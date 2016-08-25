@@ -157,8 +157,6 @@ body {
 #github-link {
 	float: right;
 }
-/********************************************************/
-
 
 /********************************************************/
 /* Note Display */
@@ -183,18 +181,38 @@ body {
 	padding: 1em;
 	margin-bottom: 2em;
 }
-/********************************************************/
 
-#iterate-articles {
+#save-note {
+  width: 140px;
+  margin: 0 auto;
+  border: 2px solid #ecf0f1;
+  border-radius: 5px;
+  font-size: 1.5em;
+}
+
+/********************************************************/
+/* Iterate Articles buttons container */
+/********************************************************/
+#iterate-buttons-container {
+  width: 25%;
+  float: right;
+  margin-right: 30px;
+}
+
+
+/********************************************************/
+/* Next Article button */
+/********************************************************/
+#next-article {
   position: relative;
   float: right;
-  width: 300px;
+  width: 140px;
   color: #ccc;
   border: 5px solid #ecf0f1;
   border-radius: 50px;
   font-size: 1.5em;
   margin-top: -3.5em;
-  margin-right: 63px;
+  margin-right: 20px;
   padding: 10px;
   text-align: center;
   line-height: 1.5em;
@@ -204,7 +222,7 @@ body {
   transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
-#iterate-articles::after {
+#next-article::after {
   content: "";
   border-radius: 50px;
   position: absolute;
@@ -219,10 +237,56 @@ body {
   transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
-#iterate-articles:hover {
+#next-article:hover {
   cursor: pointer;
 }
 
-#iterate-articles:hover::after {
+#next-article:hover::after {
+    opacity: 1;
+}
+
+/********************************************************/
+/* Prev Article button */
+/********************************************************/
+#prev-article {
+  position: relative;
+  float: left;
+  width: 140px;
+  color: #ccc;
+  border: 5px solid #ecf0f1;
+  border-radius: 50px;
+  font-size: 1.5em;
+  margin-top: -3.5em;
+  margin-right: 63px;
+  margin-left: 15px;
+  padding: 10px;
+  text-align: center;
+  line-height: 1.5em;
+  background-color: #2980b9;
+  box-shadow: 0 0 2px #ccc;
+  -webkit-transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+#prev-article::after {
+  content: "";
+  border-radius: 50px;
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 0 35px #ccc;
+  opacity: 0;
+  -webkit-transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+#prev-article:hover {
+  cursor: pointer;
+}
+
+#prev-article:hover::after {
     opacity: 1;
 }

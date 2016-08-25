@@ -11,7 +11,7 @@ router.get('/', function(req, res) {
     res.render('index');
 });
 
-router.get('/articles', function(req, res) {
+router.get('/scrape', function(req, res) {
 	request('http://www.recode.net/', function(error, response, html) {
 		if (error) {
 			console.log('Error with request: ' + error);
@@ -41,10 +41,52 @@ router.get('/articles', function(req, res) {
 	        res.json(hbsObj);
 	    }
     });
-})
+});
+
+router.get('/articles', function(req, res) {
+	Article.find({}, function(err, doc){
+		if (err){
+			console.log(err);
+		} 
+		else {
+			res.json(doc);
+		}
+	});
+});
+
+router.get('/articles/:id', function(req, res) {
+	Article.findOne({'_id': req.params.id})
+	.populate('note')
+	.exec(function(err, doc){
+		if (err){
+			console.log(err);
+		} 
+		else {
+			res.json(doc);
+		}
+	});
+});
+
+
+router.post('/articles/:id', function(req, res){
+	var newNote = new Note(req.body);
+	newNote.save(function(err, doc){
+		if(err){
+			console.log(err);
+		} 
+		else {
+			Article.findOneAndUpdate({'_id': req.params.id}, {'note':doc._id})
+			.exec(function(err, doc){
+				if (err){
+					console.log(err);
+				} else {
+					res.send(doc);
+				}
+			});
+		}
+	});
+});
 
 console.log('Controller loaded --> Centralized controller (newsScraper-controller.js');
 
 module.exports = router;
-
-
