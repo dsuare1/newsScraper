@@ -182,6 +182,10 @@ body {
 	margin-bottom: 2em;
 }
 
+#note-body-input {
+  font-size: 1em;
+}
+
 #save-note {
   width: 140px;
   margin: 0 auto;
