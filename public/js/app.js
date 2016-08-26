@@ -5,6 +5,7 @@ $(document).ready(function() {
     var articleTitles = [];
     var articleLinks = [];
     var curIndex = 0;
+    var clickCountNote = 0;
 
     $.get('/scrape', function() {
         return;
@@ -19,8 +20,11 @@ $(document).ready(function() {
         displayArticleTitle(articleTitles[curIndex]);
         displayArticleLink(articleLinks[curIndex]);
         if (curIndex >= articleTitles.length) {
-            noMoreArticles();
+            $('#article-title').html('No more articles!');
         }
+        $('#save-note').remove();
+        $('#note-body-input').val("");
+        clickCountNote = 0;
     });
 
     $('#prev-article').on('click', function() {
@@ -32,6 +36,9 @@ $(document).ready(function() {
         curIndex--;
         displayArticleTitle(articleTitles[curIndex]);
         displayArticleLink(articleLinks[curIndex]);
+        $('#save-note').remove();
+        $('#note-body-input').val("");
+        clickCountNote = 0;
     });
 
     function displayArticleTitle(title) {
@@ -40,10 +47,6 @@ $(document).ready(function() {
 
     function displayArticleLink(link) {
         $('#article-link').html(link);
-    }
-
-    function noMoreArticles() {
-        $('#article-title').html('No more articles!');
     }
 
     $('#view-articles').on('click', function() {
@@ -82,6 +85,7 @@ $(document).ready(function() {
     $('#article-title').on('click', 'p', function() {
         // empty the notes from the note section
         $('#note-body-input').empty();
+        $('#save-note').remove();
         // save the id from the article title
         var thisId = $(this).attr('data-id');
         console.log('this article\'s id: ' + thisId);
@@ -93,18 +97,43 @@ $(document).ready(function() {
             })
             // with that done, add the note information to the page
             .done(function(data) {
-                console.log(data);
-                $('#note-display').append('<div id="save-button-container"><button data-id="' + data._id + '" id="save-note">Save Note</button></div>');
-                $('#note-body-input').attr('disabled', false).focus();
+                // console.log(data);
+                if (clickCountNote != 0) {
+                    return;
+                } else {
+                    $('#note-display').append('<div id="save-button-container"><button data-id="' + data._id + '" id="save-note">Save Note</button></div>');
+                    $('#note-body-input').attr('disabled', false).focus();
                 // $('#save-note').attr('disabled', false);
-                if (data.note) {
-                    $('#note-body-input').val(data.note.body);
+                    if (data.note) {
+                        $('#note-body-input').val(data.note.body);
+                    }
                 }
+                clickCountNote++;
             });
     });
 
     $('#note-body-input').blur(function() {
         $(this).attr('disabled', true);
-        $('#save-note').remove();
-    })
+        // $('#save-note').attr('disabled', true);
+        clickCountNote = 0;
+    });
+
+    $('#note-display').on('click', 'button', function() {
+        console.log('save button hit');
+        var thisId = $(this).attr('data-id');
+        console.log('id: ' + thisId);
+        $.ajax({
+            method: "POST",
+            url: "/articles/" + thisId,
+            data: {
+                body: $('#note-body-input').val()
+            }
+        })
+        .done(function(data) {
+            console.log(data);
+            $('#note-body-input').val("");
+            // $(this).attr('disabled', true);
+            $(this).remove();
+        });
+    });
 });

@@ -190,6 +190,10 @@ body {
   font-size: 1.5em;
 }
 
+#save-note:hover {
+  cursor: pointer;
+}
+
 /********************************************************/
 /* Iterate Articles buttons container */
 /********************************************************/
