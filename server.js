@@ -52,9 +52,10 @@ app.use('/', routes);
 
 
 // /-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
-// connect to MongoDB
-mongoose.connect('mongodb://localhost/newsScraper');
-// mongoose.connect('mongodb://heroku_srjs9x0w:p8ll25jpbsgqbu85vh0rsn74bm@ds017256.mlab.com:17256/heroku_srjs9x0w');
+// connect to localhost MongoDB
+// mongoose.connect('mongodb://localhost/newsScraper');
+// connect to livehost MongoDB
+mongoose.connect('mongodb://heroku_srjs9x0w:p8ll25jpbsgqbu85vh0rsn74bm@ds017256.mlab.com:17256/heroku_srjs9x0w');
 var db = mongoose.connection;
 
 // show any mongoose errors
