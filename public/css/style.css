@@ -192,9 +192,25 @@ body {
   border: 2px solid #ecf0f1;
   border-radius: 5px;
   font-size: 1.5em;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+#delete-note {
+  width: 140px;
+  margin: 0 auto;
+  border: 2px solid #ecf0f1;
+  border-radius: 5px;
+  font-size: 1.5em;
+  display: inline-block;
+  margin-left: 5px;
 }
 
 #save-note:hover {
+  cursor: pointer;
+}
+
+#delete-note:hover {
   cursor: pointer;
 }
 

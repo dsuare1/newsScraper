@@ -21,6 +21,7 @@ $(document).ready(function() {
             $('#article-title').html('No more articles!');
         }
         $('#save-note').remove();
+        $('#delete-note').remove();
         $('#note-body-input').val("");
         clickCountNote = 0;
     });
@@ -35,6 +36,7 @@ $(document).ready(function() {
         displayArticleTitle(articleTitles[curIndex]);
         displayArticleLink(articleLinks[curIndex]);
         $('#save-note').remove();
+        $('#delete-note').remove();
         $('#note-body-input').val("");
         clickCountNote = 0;
     });
@@ -83,6 +85,7 @@ $(document).ready(function() {
     $('#article-title').on('click', 'p', function() {
         $('#note-body-input').empty();
         $('#save-note').remove();
+        $('#delete-note').remove();
         var thisId = $(this).attr('data-id');
 
         $.ajax({
@@ -93,7 +96,7 @@ $(document).ready(function() {
                 if (clickCountNote != 0) {
                     return;
                 } else {
-                    $('#note-display').append('<div id="save-button-container"><button data-id="' + data._id + '" id="save-note">Save Note</button></div>');
+                    $('#note-display').append('<div id="save-button-container"><button data-id="' + data._id + '" id="save-note">Save Note</button><button data-id="' + data._id + '" id="delete-note">Delete Note</button></div>');
                     $('#note-body-input').attr('disabled', false).focus();
 
                     if (data.note) {
@@ -104,8 +107,9 @@ $(document).ready(function() {
             });
     });
 
-    $('#note-display').on('click', 'button', function() {
+    $('#note-display').on('click', '#save-note', function() {
         $(this).remove();
+        $('#delete-note').remove();
         $('#note-body-input').attr('disabled', true);
         var thisId = $(this).attr('data-id');
         $.ajax({
@@ -117,6 +121,22 @@ $(document).ready(function() {
         })
         .done(function(data) {
             $('#note-body-input').val('Your note was successfully saved to the database!  You can check back later to remind yourself of the contents of your note.');
+            clickCountNote = 0;
+        });
+    });
+
+    $('#note-display').on('click', '#delete-note', function() {
+        $(this).remove();
+        $('#save-note').remove();
+        $('#note-body-input').attr('disabled', true);
+        var thisId = $(this).attr('data-id');
+        $.ajax({
+            method: "DELETE",
+            url: "/articles/" + thisId
+        })
+        .done(function(data) {
+            $('#note-body-input').val('The note was deleted from the database.');
+            clickCountNote = 0;
         });
     });
 
