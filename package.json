@@ -4,7 +4,8 @@
   "description": "Scrape news articles and allow users to comment.",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -24,5 +25,8 @@
     "mongoose": "^4.5.10",
     "morgan": "^1.7.0",
     "request": "^2.74.0"
+  },
+  "engines": {
+    "node": "6.2.2"
   }
 }
