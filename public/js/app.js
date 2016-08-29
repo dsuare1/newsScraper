@@ -77,6 +77,8 @@ $(document).ready(function() {
             $('#next-article').fadeIn(2000).css('display', 'inline-block').removeClass('hidden');
 
             $('#prev-article').fadeIn(2000).css('display', 'inline-block').removeClass('hidden');
+
+            // change these to use .show()
         });
 
     });
